@@ -1,26 +1,39 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <header>
+    <div class="logo">dyco.learn</div>
+    <div 
+      v-for="tab in tabs"
+      :key="tab"
+      :class="['items', {active:currentTab === tab}]"
+      @click="currentTab = tab"
+    >
+    {{tab}}
+    </div>
+  </header>
+  <main>
+   <keepalive> <component :is="currentTab"></component></keepalive>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Intro from './components/Intro.vue'
+import CodeExample from './components/CodeExample.vue'
+import Reference from './components/Reference.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Intro, CodeExample, Reference
+  },
+  data (){
+    return{
+      currentTab:'Intro',
+      tabs:['Intro', 'CodeExample', 'Reference']
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  
 </style>
